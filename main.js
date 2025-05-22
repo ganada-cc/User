@@ -30,7 +30,6 @@ async function testConnection() {
       // 테스트 쿼리 (예: SHOW TABLES)
       const [rows] = await connection.query('SHOW TABLES');
       console.log('📦 현재 테이블 목록:', rows);
-  
       await connection.end();
     } catch (error) {
       console.error('❌ DB 연결 실패:', error.message);
@@ -53,7 +52,7 @@ const port = 3000,
     app = express(),
     fs = require("fs"),
     layouts = require("express-ejs-layouts"),
-    calendarRouter = require('./routes/calendarRoute'),
+  //  calendarRouter = require('./routes/calendarRoute'),
     usersRouter = require('./routes/usersRoute');
     //reminderRouter = require('./routes/reminderRoute'),
     //communityRouter = require('./routes/communityRoute'),
@@ -73,7 +72,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 //라우터 등록
-app.use('/calendar', calendarRouter);
+//app.use('/calendar', calendarRouter);
 app.use('/users', usersRouter);
 //app.use('/reminder', reminderRouter);
 //app.use('/community', communityRouter)
@@ -89,11 +88,14 @@ app.use('/users', usersRouter);
 // root - 로그인
 app.get(
     "/", (req,res) =>
-    {res.render("users/login.ejs");}
+    {res.render("login");}
 );
 
+app.get(
+    "/signup", (req,res) =>
+    {res.render("signup");}
+);
 
-/*
 app.listen(port,() => {
   const dir = "./uploads";
   if (!fs.existsSync(dir)) {
@@ -102,7 +104,7 @@ app.listen(port,() => {
   console.log("서버 실행 중");
   }
 );
-*/
+
 
 
 
