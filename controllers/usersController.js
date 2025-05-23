@@ -62,7 +62,7 @@ exports.login = async function (req, res) {
                   maxAge: 1000 * 60 * 60 * 24 * 7, // 7일간 유지
                   httpOnly: true,
                 })
-                .render('login', { signInResponse: signInResponse, loginState : '성공'});
+                .render('users/login', { signInResponse: signInResponse, loginState : '성공' });                
   }
   else {
     return res.send(`
