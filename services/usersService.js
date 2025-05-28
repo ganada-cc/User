@@ -130,3 +130,10 @@ exports.postSignIn = async function (user_id, password) {
     return baseResponse.DB_ERROR;
   }
 };
+
+//커뮤니티 요청 처리 
+exports.getUserRelation = function(userId) {
+  return usersModel.getRelationByUserId(pool, userId)
+    .then(rows => rows.length ? rows[0].relationship : null);
+};
+

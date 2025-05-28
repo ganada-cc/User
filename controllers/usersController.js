@@ -74,3 +74,14 @@ exports.login = async function (req, res) {
   `);
   }
 };
+
+//커뮤니티 요청 처리
+exports.getRelation = function(req, res) {
+  const userId = req.params.userId;
+  usersService.getUserRelation(userId)
+    .then(relationship => {
+      if (!relationship) return res.status(404).json({ message: "No relation found" });
+      res.json({ relationship });
+    })
+    .catch(() => res.status(500).json({ message: "Server error" }));
+};

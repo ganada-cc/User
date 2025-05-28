@@ -26,4 +26,8 @@ router.post("/logout", jwtMiddleware, (req, res) => {
     }
   });
 
+//커뮤니티에서 오는 요청 처리
+
+router.get('/relation/:userId', users.getRelation);
+
 module.exports = router;
