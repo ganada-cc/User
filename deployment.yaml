@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cheer_user
+  labels:
+    app: cheer_user
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: cheer_user
+  template:
+    metadata:
+      labels:
+        app: cheer_user
+        tier: cheer_user
+    spec:
+      containers:
+        - name: cheer_user
+          image: ssohy/cheer_user:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+              name: cheer_user
+          env:
+            - name: dbHost
+              valueFrom:
+                configMapKeyRef:
+                  name: cc_db
+                  key: dbHost
+            - name: dbUser
+              valueFrom:
+                configMapKeyRef:
+                  name: cc_db
+                  key: dbUser
+            - name: dbPassword
+              valueFrom:
+                configMapKeyRef:
+                  name: cc_db
+                  key: dbPassword
+            - name: dbPort
+              valueFrom:
+                configMapKeyRef:
+                  name: cc_db
+                  key: dbPort
+            - name: dbName
+              valueFrom:
+                configMapKeyRef:
+                  name: cc_db
+                  key: dbName
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cheer_user
+  labels:
+    app: cheer_user
+spec:
+  ports:
+    - port: 80
+      targetPort: 5000
+  selector:
+    app: cheer_user
+    tier: cheer_user
+  type: LoadBalancer
