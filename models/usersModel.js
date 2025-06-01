@@ -68,6 +68,13 @@ async function selectUserAccount(pool, user_id) {
   return rows;
 }
 
+
+//커뮤니티 요청 처리
+async function getRelationByUserId(pool, userId) {
+  const getRelationQuery = 'SELECT relationship FROM User WHERE user_id = ? LIMIT 1;';
+  const [rows]=await pool.query(getRelationQuery,[userId]);
+  return rows;
+};
 // JWT 저장
 async function insertUserJWT(pool, insertUserJWTParams) {
   const insertUserJWTQuery = `
@@ -76,6 +83,7 @@ async function insertUserJWT(pool, insertUserJWTParams) {
     WHERE user_id = ?;
   `;
   const [result] = await pool.query(insertUserJWTQuery, insertUserJWTParams);
+
   return result;
 }
 
@@ -87,4 +95,5 @@ module.exports = {
   selectUserPassword,
   selectUserAccount,
   insertUserJWT,
+  getRelationByUserId,
 };
