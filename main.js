@@ -39,21 +39,24 @@ app.use(cookieParser());
 //라우터 등록
 app.use('/users', usersRouter);
 
-// root - 로그인
+// 로그인
 app.get("/", (req,res) => {
     res.render("users/login");
 });
 
-app.use((req, res, next) => {
-  console.log(`[요청] ${req.method} ${req.originalUrl}`);
-  next();
-});
+// 파드 헬스 체크 기능
+// app.get('/health', (req, res) => {
+//   res.status(200).send('OK');
+// });
 
+// app.get('/ready', (req, res) => {
+//   res.status(200).send('Ready');
+// });
 
 app.listen(port, () => {
   const dir = "./uploads";
   if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
   }
-  console.log(`서버 실행 중4 on port ${port}`);
+  console.log(`서버 실행 중6 on port ${port}`);
 });
