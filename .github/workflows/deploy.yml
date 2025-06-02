@@ -60,7 +60,7 @@ jobs:
 
       - name: Replace image tag in cheer-user.yaml
         run: |
-          sed -i "s|image: ssohy/cheer-user:.*|image: ssohy/cheer-user:${{ github.sha }}|" ssohy/cheer-user.yaml
+          sed -i "s|image: ssohy/cheer-user:.*|image: ssohy/cheer-user:${{ github.sha }}|" cheer-user.yaml
 
       - name: Apply Kubernetes Manifests
         run: |
