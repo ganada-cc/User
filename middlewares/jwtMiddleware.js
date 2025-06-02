@@ -11,6 +11,7 @@ const jwtMiddleware = (req, res, next) => {
         jwt.verify(token, process.env.JWT_SECRET, (err, verifiedToken) => {
             if (err) reject(err);
             resolve(verifiedToken);
+            console.log("JWT_SECRET: "+ process.env.JWT_SECRET);
         });
     });
 
