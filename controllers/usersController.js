@@ -62,9 +62,10 @@ exports.login = async function (req, res) {
                   maxAge: 1000 * 60 * 60 * 24 * 7, // 7일간 유지
                   httpOnly: true,
                 })
-                .render('login', { signInResponse: signInResponse, loginState : '성공'});
+                .render('users/login', { signInResponse: signInResponse, loginState : '성공' });                
   }
   else {
+    console.log("[로그인 시도]", req.body);
     return res.send(`
     <script>
       if (confirm('로그인에 실패했습니다.')) {
@@ -73,4 +74,15 @@ exports.login = async function (req, res) {
     </script>
   `);
   }
+};
+
+//커뮤니티 요청 처리
+exports.getRelation = function(req, res) {
+  const userId = req.params.userId;
+  usersService.getUserRelation(userId)
+    .then(relationship => {
+      if (!relationship) return res.status(404).json({ message: "No relation found" });
+      res.json({ relationship });
+    })
+    .catch(() => res.status(500).json({ message: "Server error" }));
 };

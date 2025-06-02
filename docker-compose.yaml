@@ -1,0 +1,15 @@
+version: '1'
+services:
+  cheer_user:
+    image: cheer_user
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cheer_user
+    ports:
+      - "3001:3000"
+    environment:
+      - PORT=3000
+      - CHEER_USER_HOST=cheer_user
+      - CHEER_USER_PORT=3000
+    restart: "no"
