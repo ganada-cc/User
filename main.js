@@ -13,6 +13,9 @@ const pool = mysql.createPool({
 });
 
 module.exports = pool;  //모듈로 내보내기
+module.exports = {
+    jwtsecret: process.env.JWT_SECRET
+};
 
 // 기본 설정
 const port = process.env.PORT || 3000,
