@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cheer-user
+  name: user
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cheer-user
+      app: user
   template:
     metadata:
       labels:
-        app: cheer-user
+        app: user
     spec:
       containers:
-      - name: cheer-user
+      - name: user
         image: ssohy/cheer-user:latest
         imagePullPolicy: Always
         ports:
@@ -25,13 +25,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cheer-user
+  name: user
   labels:
-    app: cheer-user
+    app: user
 spec:
   selector:
-    app: cheer-user
+    app: user
   ports:
     - port: 80          # 외부에서 접근할 포트
       targetPort: 3000  # 실제 컨테이너 포트
-  type: LoadBalancer
+  type: ClusterIP
