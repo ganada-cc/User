@@ -44,6 +44,7 @@ app.get("/", (req,res) => {
     res.render("users/login");
 });
 
+
 // 파드 헬스 체크 기능
 // app.get('/health', (req, res) => {
 //   res.status(200).send('OK');
