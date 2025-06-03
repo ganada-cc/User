@@ -48,33 +48,32 @@ exports.postUsers = async function (req,res) {
       }
 };
 
-// 로그인
-exports.login = async function (req, res) {
-    const { user_id, password } = req.body;
 
-  // TODO: email, password 형식적 Validation
+// userController.js (로그인 함수 내)
+exports.login = async function (req, res) {
+  const { user_id, password } = req.body;
 
   const signInResponse = await usersService.postSignIn(user_id, password);
 
   if (signInResponse.user_id == user_id) {
     return res
-                .cookie("x_auth", signInResponse.jwt, {
-                  maxAge: 1000 * 60 * 60 * 24 * 7, // 7일간 유지
-                  httpOnly: true,
-                })
-                .render('users/login', { signInResponse: signInResponse, loginState : '성공' });                
-  }
-  else {
-    console.log("[로그인 시도]", req.body);
+      .cookie("x_auth", signInResponse.jwt, {
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        httpOnly: true,
+      })
+      .redirect('/observediary');  // 여기에 넣으면 로그인 후 바로 이동!
+  } else {
+    // 로그인 실패 처리
     return res.send(`
-    <script>
-      if (confirm('로그인에 실패했습니다.')) {
-        window.location.href = "/";
-      }
-    </script>
-  `);
+      <script>
+        if (confirm('로그인에 실패했습니다.')) {
+          window.location.href = "/";
+        }
+      </script>
+    `);
   }
 };
+
 
 //커뮤니티 요청 처리
 exports.getRelation = function(req, res) {
