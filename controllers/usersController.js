@@ -55,12 +55,12 @@ exports.login = async function (req, res) {
 
   const signInResponse = await usersService.postSignIn(user_id, password);
   if (signInResponse.user_id == user_id) {
-    res.cookie("x_auth", signInResponse.jwt, {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 7,
-    });
-    res.send(`<script>window.location.href='/calendar';</script>`);
-    
+    return res
+      .cookie("x_auth", signInResponse.jwt, {
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        httpOnly: true,
+      })
+      .redirect('/calendar');  // 여기에 넣으면 로그인 후 바로 이동!
   } else {
     // 로그인 실패 처리
     return res.send(`
