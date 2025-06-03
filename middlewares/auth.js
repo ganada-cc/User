@@ -1,5 +1,5 @@
 module.exports = function (req, res, next) {
-  const userId = req.headers['user-id'];
+  const userId = req.headers['x-user-id'];
   if (!userId) {
     return res.status(401).json({ message: '사용자 인증 정보가 없습니다.' });
   }
