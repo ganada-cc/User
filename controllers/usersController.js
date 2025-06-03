@@ -54,8 +54,9 @@ exports.login = async function (req, res) {
   const { user_id, password } = req.body;
 
   const signInResponse = await usersService.postSignIn(user_id, password);
-
+  console.log('컨트롤러에서 헤더에 userid 추가하려고하는중....');
   if (signInResponse.user_id == user_id) {
+    console.log('추가중...');
     return res
       .cookie("x_auth", signInResponse.jwt, {
         maxAge: 1000 * 60 * 60 * 24 * 7,
