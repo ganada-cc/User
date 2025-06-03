@@ -61,7 +61,7 @@ exports.login = async function (req, res) {
         maxAge: 1000 * 60 * 60 * 24 * 7,
         httpOnly: true,
       })
-      .redirect('http://134.22.108.77/calendar');  // 여기에 넣으면 로그인 후 바로 이동!
+      .redirect('/calendar');  // 여기에 넣으면 로그인 후 바로 이동!
   } else {
     // 로그인 실패 처리
     return res.send(`
