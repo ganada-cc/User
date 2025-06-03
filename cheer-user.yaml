@@ -35,4 +35,4 @@ spec:
   ports:
     - port: 80          # 외부에서 접근할 포트
       targetPort: 3000  # 실제 컨테이너 포트
-  type: ClusterIP
+  type: LoadBalancer
