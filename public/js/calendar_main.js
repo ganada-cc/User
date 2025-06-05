@@ -84,7 +84,7 @@ window.addEventListener('DOMContentLoaded', function() {
     exportLink.classList.remove('active');
     checkLink.classList.remove('active');
     mypageLink.classList.remove('active');
-  } else if (currentURL === '/reminder') {
+  } else if (currentURL === '/minddiary') {
     calendarLink.classList.remove('active');
     alarmLink.classList.add('active');
     exportLink.classList.remove('active');
