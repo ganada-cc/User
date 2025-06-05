@@ -72,7 +72,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
   // 링크 요소들
   var calendarLink = document.querySelector('.calendaractive');
-  var alarmLink = document.querySelector('.alarmactive');
+  var alarmLink = document.querySelector('.mindactive');
   var exportLink = document.querySelector('.exportactive');
   var checkLink = document.querySelector('.checkactive');
   var mypageLink = document.querySelector('.mypageactive');
