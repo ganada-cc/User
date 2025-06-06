@@ -6,3 +6,4 @@ cheeseenv/
 node_modules/
 .git-credentials
 user-secret.yaml
+kubectl
