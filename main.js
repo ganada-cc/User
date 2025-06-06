@@ -66,5 +66,5 @@ app.listen(port, () => {
   if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
   }
-  console.log(`서버 실행 중6 on port ${port}`);
+  console.log(`서버 실행 중`);
 });
