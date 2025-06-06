@@ -45,14 +45,21 @@ app.get("/", (req,res) => {
 });
 
 
-// 파드 헬스 체크 기능
-// app.get('/health', (req, res) => {
-//   res.status(200).send('OK');
-// });
+// 헬스 체크 라우트
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
-// app.get('/ready', (req, res) => {
-//   res.status(200).send('Ready');
-// });
+app.get('/ready', async (req, res) => {
+  try {
+    const conn = await pool.getConnection();
+    await conn.query('SELECT 1');
+    conn.release();
+    res.status(200).send('Ready');
+  } catch (err) {
+    res.status(500).send('DB Not Ready');
+  }
+});
 
 app.listen(port, () => {
   const dir = "./uploads";
